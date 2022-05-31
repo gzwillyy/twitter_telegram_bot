@@ -3,6 +3,7 @@
 import logging
 import os
 import time
+
 from lib.log import writelog
 from twitter import handle
 
@@ -11,7 +12,7 @@ try:
 except:
     os.system("pip3 install snscrape")
 try:
-    import pandas
+    import pandas as pd
 except:
     os.system("pip3 install pandas")
 
@@ -38,6 +39,8 @@ if __name__ == '__main__':
     initLog()
     twitter = handle.Handle("cats")
     twitter.tweets()
+    df = pd.DataFrame(twitter.twitterlist,columns=["Date","Username","Tweet"])
+    print(df)
 
     # while True:
     #     logging.info("log info")

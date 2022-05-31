@@ -6,7 +6,7 @@ import pandas as pd
 class Handle:
     query = []
     limit = 10
-    twitters = []
+    twitterlist = []
 
     def __init__(self, query):
         logging.info("初始化twitter...")
@@ -16,11 +16,10 @@ class Handle:
     def tweets(self):
 
         for tweet in sntwitter.TwitterSearchScraper(self.query).get_items():
-            logging.info("初始化twitter...")
-            if len(self.twitters) == self.limit:
+            if len(self.twitterlist) == self.limit:
                 break
             else:
-                self.twitters.append([
+                self.twitterlist.append([
                     tweet.date,
                     tweet.user.username,
                     tweet.content,
