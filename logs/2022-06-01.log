@@ -1,0 +1,7 @@
+2022/06/01 02:26:52 handle.py:12   INFO    初始化twitter...
+2022/06/01 02:26:52 handle.py:13   INFO    查询 cats
+2022/06/01 02:26:52 twitter.py:368  INFO    Retrieving scroll page None
+2022/06/01 02:26:52 twitter.py:300  INFO    Retrieving guest token
+2022/06/01 02:26:52 base.py:168  INFO    Retrieving https://twitter.com/search?f=live&lang=en&q=cats&src=spelling_expansion_revert_click
+2022/06/01 02:26:52 base.py:169  DEBUG   ... with headers: {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.845 Safari/537.86'}
+2022/06/01 02:26:52 connectionpool.py:1001 DEBUG   Starting new HTTPS connection (1): twitter.com:443

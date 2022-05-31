@@ -1,4 +1,12 @@
 #!/usr/bin/env python3
+
+
+import logging
+import os
+import time
+from lib.log import writelog
+from twitter import handle
+
 try:
     import snscrape
 except:
@@ -7,12 +15,6 @@ try:
     import pandas
 except:
     os.system("pip3 install pandas")
-    
-import logging
-import os
-import time
-from lib.log import writelog
-from twitter import handle
 
 CurFilePath = os.path.abspath(__file__)
 # print("CurFilePath=%s" % CurFilePath)
