@@ -1,9 +1,16 @@
 #!/usr/bin/env python3
+try:
+    import snscrape
+except:
+    os.system("pip3 install snscrape")
+try:
+    import pandas
+except:
+    os.system("pip3 install pandas")
+    
 import logging
 import os
 import time
-import logging
-
 from lib.log import writelog
 from twitter import handle
 
@@ -18,7 +25,6 @@ CurFolder = os.path.dirname(CurFilePath)
 LogFolder = os.path.join(CurFolder, "logs")
 
 
-# pip3 install python-dateutil
 def initLog():
     curDatetimeStr = time.strftime("%Y-%m-%d", time.localtime())  # '20231111'
     os.makedirs(LogFolder, exist_ok=True)
@@ -31,7 +37,7 @@ if __name__ == '__main__':
     initLog()
     twitter = handle.Handle("cats")
     twitter.tweets()
-    print(twitter.twitters)
+
     # while True:
     #     logging.info("log info")
     #     time.sleep(1)

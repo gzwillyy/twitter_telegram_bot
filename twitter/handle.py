@@ -16,7 +16,7 @@ class Handle:
     def tweets(self):
 
         for tweet in sntwitter.TwitterSearchScraper(self.query).get_items():
-
+            logging.info("初始化twitter...")
             if len(self.twitters) == self.limit:
                 break
             else:
