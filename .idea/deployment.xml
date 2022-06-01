@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="ubuntu@34.207.111.144:22" remoteFilesAllowedToDisappearOnAutoupload="false">
-    <serverData>
-      <paths name="ubuntu@34.207.111.144:22">
-        <serverdata>
-          <mappings>
-            <mapping deploy="/code/twitter_telegram_bot" local="$PROJECT_DIR$" />
-          </mappings>
-        </serverdata>
-      </paths>
-    </serverData>
+  <component name="PublishConfigData" autoUpload="Always" remoteFilesAllowedToDisappearOnAutoupload="false">
     <option name="myAutoUpload" value="ALWAYS" />
   </component>
 </project>

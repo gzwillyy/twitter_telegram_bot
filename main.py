@@ -37,12 +37,22 @@ def initLog():
 
 if __name__ == '__main__':
     initLog()
-    twitter = handle.Handle("cats")
-    twitter.tweets()
-    df = pd.DataFrame(twitter.twitterlist, columns=["Date", "Username", "Link", "Tweet"])
-    for item in twitter.twitterlist:
+    twitter = handle.Handle()
+
+    # 关键字搜索推文
+    twitter.tweetsWithKeywords('cats')
+    df = pd.DataFrame(twitter.list, columns=["Date", "Username", "Link", "Tweet"])
+    for item in twitter.list:
         logging.info(item)
     print(df)
+    logging.info("===============================")
+    # 用户名查找推文
+    twitter.tweetsWithUsers('gzwilly1')
+    df = pd.DataFrame(twitter.list, columns=["Date", "Username", "Link", "Tweet"])
+    for item in twitter.list:
+        logging.info(item)
+    print(df)
+
 
     # while True:
     #     logging.info("log info")
