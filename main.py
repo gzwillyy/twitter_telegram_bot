@@ -39,7 +39,9 @@ if __name__ == '__main__':
     initLog()
     twitter = handle.Handle("cats")
     twitter.tweets()
-    df = pd.DataFrame(twitter.twitterlist,columns=["Date","Username","Link","Tweet"])
+    df = pd.DataFrame(twitter.twitterlist, columns=["Date", "Username", "Link", "Tweet"])
+    for item in twitter.twitterlist:
+        logging.info(item)
     print(df)
 
     # while True:
