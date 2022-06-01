@@ -39,7 +39,7 @@ if __name__ == '__main__':
     initLog()
     twitter = handle.Handle("cats")
     twitter.tweets()
-    df = pd.DataFrame(twitter.twitterlist,columns=["Date","Username","Tweet"])
+    df = pd.DataFrame(twitter.twitterlist,columns=["Date","Username","Link","Tweet"])
     print(df)
 
     # while True:

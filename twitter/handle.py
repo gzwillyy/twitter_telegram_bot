@@ -23,4 +23,5 @@ class Handle:
                     tweet.date,
                     tweet.user.username,
                     tweet.content,
+                    tweet.links,
                 ])
