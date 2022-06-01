@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from cgitb import text
+from email import message
 from random import randint
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types import InlineKeyboardMarkup,InlineKeyboardButton
@@ -18,7 +19,8 @@ class Bots:
         
         button_start_monitor = InlineKeyboardButton(text="开启监控",callback_data="start_monitor")  
         button_stop_monitor = InlineKeyboardButton(text="停止监控",callback_data="stop_monitor")
-        keyboard_inline = InlineKeyboardMarkup().add(button_start_monitor,button_stop_monitor)
+        button_status_monitor = InlineKeyboardButton(text="运行状态",callback_data="status_monitor")
+        keyboard_inline = InlineKeyboardMarkup().add(button_start_monitor,button_stop_monitor,button_status_monitor)
      
         @dp.message_handler(commands=['menu'])
         async def send_welcome(message: types.Message):
@@ -31,12 +33,21 @@ class Bots:
             
         @dp.callback_query_handler(text=["start_monitor","stop_monitor"])
         async def return_mune(call:types.CallbackQuery):
+            """控制菜单回调
+
+            Args:
+                call (types.CallbackQuery): _description_
+            """
             if call.data == "start_monitor":
-                await call.message.answer(randint(1,10))   
+                await call.message.answer(randint(1,10)) 
             
             if call.data == "stop_monitor":
                 await call.message.answer(randint(100,1000))  
-            
+                
+            if call.data == "status_monitor":
+                await call.message.answer(randint(100,1000))
+                  
+            await call.answer()
             
              
             
@@ -48,6 +59,7 @@ class Bots:
                 message (types.Message): _description_
             """
             await message.reply("监控已准备就绪")
+            await self.bot.send_message(message.from_user.id,message.text)
             
         @dp.message_handler()
         async def echo(message: types.Message):
