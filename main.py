@@ -3,9 +3,9 @@
 import logging
 import os
 import time
-
+import configparser
 from lib.log import writelog
-from twitter import handle
+from twitter import Handle
 
 try:
     import snscrape
@@ -57,3 +57,9 @@ if __name__ == '__main__':
     # while True:
     #     logging.info("log info")
     #     time.sleep(1)
+
+
+cf = configparser.ConfigParser()
+config = cf.read("config.ini")
+print(config)
+api_key = config['telegram']['api_key']
