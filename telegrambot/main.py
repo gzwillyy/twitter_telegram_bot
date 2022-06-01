@@ -16,10 +16,10 @@ class Bots:
         self.bot = Bot(token=api_key)
         dp = Dispatcher(self.bot)
         
-        button_start_monitor = InlineKeyboardButton("开启监控",callback_data="start_monitor")  
-        button_stop_monitor = InlineKeyboardButton("停止监控",callback_data="stop_monitor")
-        keyboard_inline = InlineKeyboardMarkup.add(button_start_monitor).add(button_stop_monitor)
-        
+        button_start_monitor = InlineKeyboardButton(text="开启监控",callback_data="start_monitor")  
+        button_stop_monitor = InlineKeyboardButton(text="停止监控",callback_data="stop_monitor")
+        keyboard_inline = InlineKeyboardMarkup().add(button_start_monitor,button_stop_monitor)
+     
         @dp.message_handler(commands=['menu'])
         async def send_welcome(message: types.Message):
             """返回控制菜单
