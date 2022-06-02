@@ -10,9 +10,9 @@ async def on_startup(_):
     
 from handlers import admin,client,other
 
-admin.register_handlers_admin(dp)
+# admin.register_handlers_admin(dp)
 client.register_handlers_client(dp)
-other.register_handlers_other(dp)
+# other.register_handlers_other(dp)
 
 
 # 运行长轮询    
