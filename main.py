@@ -11,10 +11,6 @@ from pprint import pp, pprint
 from database import db
 import asyncio
 
-try:
-    import snscrape
-except:
-    os.system("pip3 install snscrape")
 
 try:
     import pandas as pd
