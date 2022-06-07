@@ -24,7 +24,7 @@ async def deluser(update: Update, context: CallbackContext):
         reply_to_message_id=update.message.message_id
         )
     
-async def list(update: Update, context: CallbackContext):
+async def listuser(update: Update, context: CallbackContext):
     text_caps = ' '.join(context.args)
     my_db = db2.MysqlHelper()
     sql = "select * from user" 
@@ -40,9 +40,9 @@ async def list(update: Update, context: CallbackContext):
     
     
 def register_handlers(application : Application):
-    adduser_handler = CommandHandler('adds', adduser)
-    deluser_handler = CommandHandler('dels', deluser)
-    list_handler = CommandHandler('lists', list)
+    adduser_handler = CommandHandler('adduser', adduser)
+    deluser_handler = CommandHandler('deluser', deluser)
+    list_handler = CommandHandler('listuser', listuser)
     application.add_handler(adduser_handler)
     application.add_handler(deluser_handler)
     application.add_handler(list_handler)

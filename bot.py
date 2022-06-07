@@ -46,7 +46,7 @@ client.register_handlers(application)
 manage.register_handlers(application)
 inline.register_handlers(application)
 
-timer_handler = CommandHandler('monitor', callback_timer)
+timer_handler = CommandHandler('monitors', callback_timer)
 application.add_handler(timer_handler)
 # 负责初始化和启动应用程序、使用 Telegram 轮询更新
 application.run_polling()
