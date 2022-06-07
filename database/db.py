@@ -2,7 +2,6 @@
 import os
 from time import time
 
-from prettyprinter import pprint
 try:
     import aiomysql
     import asyncio
