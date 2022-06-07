@@ -40,9 +40,9 @@ async def list(update: Update, context: CallbackContext):
     
     
 def register_handlers(application : Application):
-    adduser_handler = CommandHandler('add', adduser)
-    deluser_handler = CommandHandler('del', deluser)
-    list_handler = CommandHandler('list', list)
+    adduser_handler = CommandHandler('adds', adduser)
+    deluser_handler = CommandHandler('dels', deluser)
+    list_handler = CommandHandler('lists', list)
     application.add_handler(adduser_handler)
     application.add_handler(deluser_handler)
     application.add_handler(list_handler)

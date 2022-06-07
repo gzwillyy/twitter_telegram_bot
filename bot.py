@@ -30,9 +30,6 @@ async def callback_alarm(context: CallbackContext):
             # 删除
             sql_d = 'delete from queue where tweet_id='+str(item[0])
             my_db.delete_one(sql_d)
-            print("+++++++++++++++++++")
-            print(sql_d)
-            print("+++++++++++++++++++")
             text = """@{}   {}   {}""".format(item[3],item[5],item[4])
             await context.bot.send_message(chat_id=context.job.chat_id, text=text)
     
