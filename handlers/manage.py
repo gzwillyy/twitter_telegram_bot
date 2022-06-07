@@ -30,6 +30,9 @@ async def listuser(update: Update, context: CallbackContext):
     sql = "select * from user" 
     result = my_db.get_all(sql)
     users =""
+    print("===============================================")
+    print(update.effective_chat.id)
+    print("===============================================")
     for item in result:
         users+=item[0]+" , "
     await context.bot.send_message(
