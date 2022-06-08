@@ -74,7 +74,7 @@ if __name__ == '__main__':
                     tweet_in_users.append(item[0])
 
         # 推特查询
-        tp = ThreadPoolExecutor(2)
+        tp = ThreadPoolExecutor(15)
         furures = []
         for username in tweet_in_users:
             furures.append(tp.submit(_search_by_user,username))
@@ -126,6 +126,6 @@ if __name__ == '__main__':
                 logging.info("获取到 {} 条推特".format(len(insert_data))) 
             
             loop.run_until_complete(db.close(pool))
-            time.sleep(13)
+            time.sleep(5)
             # loop.close()
             
