@@ -8,7 +8,7 @@ from twitter import Handle
 from concurrent.futures import ThreadPoolExecutor
 import time
 from pprint import pp, pprint
-from database import db
+from database import db2
 import asyncio
 
 
@@ -57,22 +57,18 @@ if __name__ == '__main__':
     # for item in twitter.list:
     #     logging.info(item)
     while True:
-        loop = asyncio.get_event_loop()
-        pool = loop.run_until_complete(db.register())
         
-        # 监控用户列表
+        # 监控用户列表  
+        my_db = db2.MysqlHelper()
         sql = f"select tweet_user from user"
-        
-        tasks = [
-            asyncio.ensure_future(db.query(pool, sql)),
-        ]
-        result = loop.run_until_complete(asyncio.gather(*tasks))
-
+        result = my_db.get_all(sql)
+      
         tweet_in_users = []
         for res in result:
             for item in res:
-                    tweet_in_users.append(item[0])
-
+                    tweet_in_users.append(item)
+        print(tweet_in_users)
+        
         # 推特查询
         tp = ThreadPoolExecutor(15)
         furures = []
@@ -95,37 +91,32 @@ if __name__ == '__main__':
             start = time.time()
             tmp_tup_str = "','".join(tweet_ids)
             sql = f"select tweet_id from tweets where tweet_id in  ('{tmp_tup_str}')"
-            
-            tasks = [
-                asyncio.ensure_future(db.query(pool, sql)),
-            ]
-            result = loop.run_until_complete(asyncio.gather(*tasks))
-    
+            result_tweet_id = my_db.get_all(sql)
+           
             tweet_in_ids = []
-            for res in result:
+            for res in result_tweet_id:
                 for item in res:
-                    tweet_in_ids.append(item[0])
-            
+                    tweet_in_ids.append(item)
+        
             insert_data = []
             insert_queue = []
             for item in results_get:
                 if int(item['tweet_id']) not in tweet_in_ids:
-                    insert_data.append(tuple(item.values()))
-                    insert_queue.append((int(item['tweet_id']),))
-
+                    insert_data.append(item)
+                    its = {"tweet_id":item['tweet_id'],'times':int(time.time())}
+                    insert_queue.append(its)
+            # print(insert_data)
+            # print(insert_queue)
+            
             
             if len(insert_data) > 0 :
                 # 批量插入
-                sql = "insert into tweets(`tweet_id`, `tweet_user`, `tweet_date`, `tweet_content`, `tweet_url`, `tweet_type_text`, `tweet_in_reply_to_tweetId`, `tweet_in_reply_to_user`) values (%s, %s, %s, %s, %s, %s, %s, %s)"
-                sql2 = "insert into queue(`tweet_id`) values (%s)"
-                tasks_1 = [
-                    asyncio.ensure_future(db.batchInsert(pool, sql, insert_data)),
-                    asyncio.ensure_future(db.batchInsert(pool, sql2, insert_queue))
-                ]
-                result = loop.run_until_complete(asyncio.gather(*tasks_1))
+                # sql = "insert into tweets(`tweet_id`, `tweet_user`, `tweet_date`, `tweet_content`, `tweet_url`, `tweet_type_text`, `tweet_in_reply_to_tweetId`, `tweet_in_reply_to_user`) values (%s, %s, %s, %s, %s, %s, %s, %s)"
+                # sql2 = "insert into queue(`tweet_id`) values (%s)"
+               
+                my_db.addAll('tweets',insert_data)
+                my_db.addAll('queue',insert_queue)
                 logging.info("获取到 {} 条推特".format(len(insert_data))) 
-            
-            loop.run_until_complete(db.close(pool))
             time.sleep(5)
             # loop.close()
             

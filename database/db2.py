@@ -76,4 +76,20 @@ class MysqlHelper(object):
             self.close()
         except Exception as e:
             print(e)
+            
+    def addAll(self, tableName,data):
+    		#获取字段
+        field = []
+        for key in data[0]:
+            field.append("`"+key+"`")
+        addAllArr =  []
+        for x in data:
+            addAllArr.append(str(tuple(x.values())))
+        addAllArr = tuple(addAllArr)
+        sql = """ INSERT INTO `%s` (%s) VALUES %s """ % (tableName, ','.join(field), ','.join(tuple(addAllArr)))
+        sql = sql.replace('None', 'null')
+        self.connect()
+        self.cursor.execute(sql)
+        self.conn.commit()
+        self.close()
 
